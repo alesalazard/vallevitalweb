@@ -1,0 +1,2648 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valle Vital Experiences | Cali, Colombia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --azul: #1a3a6b;
+        --azul-claro: #2a5298;
+        --verde: #2d7a3a;
+        --verde-claro: #4caf50;
+        --naranja: #c75b1a;
+        --naranja-claro: #e07a3a;
+        --crema: #faf8f3;
+        --blanco: #ffffff;
+        --gris-oscuro: #1c1c1c;
+        --gris-medio: #555;
+        --gris-claro: #f0ede6;
+        --sombra: rgba(26, 58, 107, 0.12);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Jost", sans-serif;
+        background: var(--crema);
+        color: var(--gris-oscuro);
+        overflow-x: hidden;
+      }
+
+      /* ========== LANGUAGE TOGGLE ========== */
+      .lang-toggle {
+        position: fixed;
+        top: 18px;
+        right: 24px;
+        z-index: 1100;
+        display: flex;
+        gap: 0;
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .lang-btn {
+        padding: 6px 16px;
+        font-family: "Jost", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: white;
+        transition: all 0.3s;
+      }
+      .lang-btn.active {
+        background: white;
+        color: var(--azul);
+      }
+
+      /* ========== NAV ========== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 20px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.4s;
+      }
+      nav.scrolled {
+        background: rgba(26, 58, 107, 0.97);
+        backdrop-filter: blur(16px);
+        padding: 12px 60px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      }
+      .nav-logo {
+        height: 52px;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        transition: opacity 0.3s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--naranja-claro);
+        transition: width 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .hamburger span {
+        width: 24px;
+        height: 2px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+
+      /* ========== HERO ========== */
+      #hero {
+        height: 100vh;
+        min-height: 700px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .img-logo {
+        height: 250px;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+      }
+
+      .hero-slides {
+        position: absolute;
+        inset: 0;
+      }
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+      }
+      .hero-slide.active {
+        opacity: 1;
+      }
+      .hero-slide::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 58, 107, 0.72) 0%,
+          rgba(26, 58, 107, 0.3) 50%,
+          rgba(199, 91, 26, 0.4) 100%
+        );
+      }
+
+      /* Gradient placeholder slides */
+      .slide-1 {
+        background: linear-gradient(
+          135deg,
+          #1a3a6b 0%,
+          #2d7a3a 50%,
+          #c75b1a 100%
+        );
+      }
+      .slide-2 {
+        background: linear-gradient(
+          135deg,
+          #2d7a3a 0%,
+          #1a3a6b 50%,
+          #4caf50 100%
+        );
+      }
+      .slide-3 {
+        background: linear-gradient(
+          135deg,
+          #c75b1a 0%,
+          #1a3a6b 70%,
+          #2d7a3a 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        padding: 0 24px;
+        animation: heroFadeUp 1.2s ease both;
+      }
+
+      @keyframes heroFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-eyebrow {
+        font-size: 11px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--naranja-claro);
+        margin-bottom: 20px;
+        margin-top: -30px;
+        font-weight: 400;
+      }
+
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(52px, 8vw, 50px);
+        font-weight: 300;
+        line-height: 1.05;
+        margin-bottom: 24px;
+        letter-spacing: -1px;
+      }
+      .hero-title em {
+        font-size: clamp(52px, 8vw, 96px);
+        font-style: italic;
+        color: var(--naranja-claro);
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        opacity: 0.9;
+        max-width: 540px;
+        margin: 0 auto 42px;
+        line-height: 1.7;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn-primary {
+        padding: 15px 40px;
+        background: var(--naranja);
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: all 0.3s;
+        border: 2px solid var(--naranja);
+      }
+      .btn-primary:hover {
+        background: transparent;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(199, 91, 26, 0.4);
+      }
+      .btn-outline {
+        padding: 15px 40px;
+        background: transparent;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: all 0.3s;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+      }
+      .btn-outline:hover {
+        border-color: white;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .hero-scroll-hint {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 50px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: scrollLine 2s ease infinite;
+      }
+      @keyframes scrollLine {
+        0% {
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+        51% {
+          transform: scaleY(1);
+          transform-origin: bottom;
+        }
+        100% {
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+      }
+
+      /* ========== SECTION COMMON ========== */
+      section {
+        padding: 100px 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .section-eyebrow {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--naranja);
+        margin-bottom: 16px;
+        font-weight: 500;
+      }
+
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(36px, 5vw, 58px);
+        font-weight: 300;
+        line-height: 1.1;
+        color: var(--azul);
+        margin-bottom: 20px;
+      }
+      .section-title em {
+        font-style: italic;
+        color: var(--naranja);
+      }
+
+      .section-subtitle {
+        font-size: 16px;
+        color: var(--gris-medio);
+        line-height: 1.8;
+        max-width: 580px;
+        font-weight: 300;
+      }
+
+      /* ========== NOSOTROS ========== */
+      #nosotros {
+        background: var(--blanco);
+      }
+
+      .nosotros-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        margin-top: 60px;
+      }
+
+      .nosotros-visual {
+        position: relative;
+        height: 520px;
+      }
+
+      .nosotros-img-main {
+        width: 75%;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(135deg, var(--azul) 0%, var(--verde) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 80px;
+      }
+
+      .nosotros-img-accent {
+        width: 55%;
+        height: 280px;
+        border-radius: 4px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(
+          135deg,
+          var(--naranja) 0%,
+          var(--naranja-claro) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 60px;
+        box-shadow: 0 20px 60px rgba(199, 91, 26, 0.3);
+      }
+
+      .stat-badge {
+        position: absolute;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        background: white;
+        border-radius: 4px;
+        padding: 20px 24px;
+        box-shadow: 0 20px 60px rgba(26, 58, 107, 0.2);
+        text-align: center;
+      }
+      .stat-badge .num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 42px;
+        font-weight: 600;
+        color: var(--azul);
+        line-height: 1;
+      }
+      .stat-badge .label {
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: var(--gris-medio);
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+
+      .nosotros-text .section-subtitle {
+        max-width: 100%;
+        margin-bottom: 32px;
+      }
+
+      .valores-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .valores-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        font-size: 15px;
+        color: var(--gris-medio);
+        line-height: 1.6;
+      }
+      .valor-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .vi-azul {
+        background: rgba(26, 58, 107, 0.08);
+      }
+      .vi-verde {
+        background: rgba(45, 122, 58, 0.08);
+      }
+      .vi-naranja {
+        background: rgba(199, 91, 26, 0.08);
+      }
+
+      /* ========== SERVICIOS ========== */
+      #servicios {
+        background: var(--gris-claro);
+        position: relative;
+        overflow: hidden;
+      }
+
+      #servicios::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(45, 122, 58, 0.06) 0%,
+          transparent 70%
+        );
+      }
+
+      .servicios-header {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto 70px;
+      }
+      .servicios-header .section-subtitle {
+        margin: 0 auto;
+      }
+
+      .servicios-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      .servicio-card {
+        background: white;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 4px 20px var(--sombra);
+        position: relative;
+      }
+      .servicio-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(26, 58, 107, 0.18);
+      }
+
+      .servicio-img {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 72px;
+        position: relative;
+        overflow: hidden;
+      }
+      .servicio-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: inherit;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .s-salud .servicio-img {
+        background: linear-gradient(135deg, #1a3a6b 0%, #2a5298 100%);
+      }
+      .s-bienestar .servicio-img {
+        background: linear-gradient(135deg, #2d7a3a 0%, #4caf50 100%);
+      }
+      .s-cultural .servicio-img {
+        background: linear-gradient(135deg, #c75b1a 0%, #e07a3a 100%);
+      }
+
+      .servicio-body {
+        padding: 32px 30px 36px;
+      }
+      .servicio-tag {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+      .s-salud .servicio-tag {
+        color: var(--azul);
+      }
+      .s-bienestar .servicio-tag {
+        color: var(--verde);
+      }
+      .s-cultural .servicio-tag {
+        color: var(--naranja);
+      }
+
+      .servicio-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 26px;
+        font-weight: 400;
+        color: var(--gris-oscuro);
+        margin-bottom: 14px;
+        line-height: 1.2;
+      }
+      .servicio-card p {
+        font-size: 14px;
+        color: var(--gris-medio);
+        line-height: 1.8;
+        margin-bottom: 24px;
+        font-weight: 300;
+      }
+
+      .servicio-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-decoration: none;
+        transition: gap 0.3s;
+      }
+      .s-salud .servicio-btn {
+        color: var(--azul);
+      }
+      .s-bienestar .servicio-btn {
+        color: var(--verde);
+      }
+      .s-cultural .servicio-btn {
+        color: var(--naranja);
+      }
+      .servicio-btn:hover {
+        gap: 14px;
+      }
+
+      /* ========== GALERÍA ========== */
+      #galeria {
+        background: var(--azul);
+        padding: 80px 0;
+      }
+
+      .galeria-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      #galeria .section-eyebrow {
+        color: var(--naranja-claro);
+      }
+      #galeria .section-title {
+        color: white;
+      }
+
+      .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 260px 260px;
+        gap: 12px;
+        padding: 0 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gal-item {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+      }
+      .gal-item:nth-child(1) {
+        grid-column: span 5;
+        grid-row: span 2;
+      }
+      .gal-item:nth-child(2) {
+        grid-column: span 4;
+      }
+      .gal-item:nth-child(3) {
+        grid-column: span 3;
+      }
+      .gal-item:nth-child(4) {
+        grid-column: span 3;
+      }
+      .gal-item:nth-child(5) {
+        grid-column: span 4;
+      }
+
+      .gal-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-size: 36px;
+        color: rgba(255, 255, 255, 0.5);
+        border: 2px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+        transition: all 0.4s;
+      }
+      .gal-placeholder:hover {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .gal-placeholder span {
+        font-size: 12px;
+        font-family: "Jost", sans-serif;
+        letter-spacing: 1px;
+        opacity: 0.7;
+      }
+
+      /* gal with real image */
+      .gal-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .gal-item:hover img {
+        transform: scale(1.06);
+      }
+
+      .galeria-note {
+        text-align: center;
+        margin-top: 30px;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 13px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+      }
+
+      /* ========== TESTIMONIOS ========== */
+      #testimonios {
+        background: var(--crema);
+      }
+
+      .testimonios-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .testimonios-track-wrapper {
+        overflow: hidden;
+        position: relative;
+      }
+      .testimonios-track-wrapper::before,
+      .testimonios-track-wrapper::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .testimonios-track-wrapper::before {
+        left: 0;
+        background: linear-gradient(to right, var(--crema), transparent);
+      }
+      .testimonios-track-wrapper::after {
+        right: 0;
+        background: linear-gradient(to left, var(--crema), transparent);
+      }
+
+      .testimonios-track {
+        display: flex;
+        gap: 24px;
+        padding: 20px 60px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .testimonios-track::-webkit-scrollbar {
+        display: none;
+      }
+
+      .testimonio-card {
+        flex-shrink: 0;
+        width: 380px;
+        background: white;
+        border-radius: 4px;
+        padding: 36px;
+        box-shadow: 0 4px 24px var(--sombra);
+        scroll-snap-align: center;
+        position: relative;
+      }
+      .testimonio-card::before {
+        content: '"';
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 80px;
+        color: var(--naranja);
+        opacity: 0.15;
+        line-height: 1;
+      }
+
+      .testimonio-stars {
+        color: #f0a500;
+        font-size: 14px;
+        margin-bottom: 16px;
+        letter-spacing: 2px;
+      }
+
+      .testimonio-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 19px;
+        line-height: 1.7;
+        color: var(--gris-oscuro);
+        font-style: italic;
+        margin-bottom: 24px;
+      }
+
+      .testimonio-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .author-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 500;
+        color: white;
+        flex-shrink: 0;
+      }
+      .author-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--azul);
+      }
+      .author-origin {
+        font-size: 12px;
+        color: var(--gris-medio);
+        margin-top: 2px;
+      }
+      .author-tipo {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-left: auto;
+      }
+      .t-salud .author-tipo {
+        background: rgba(26, 58, 107, 0.08);
+        color: var(--azul);
+      }
+      .t-bienestar .author-tipo {
+        background: rgba(45, 122, 58, 0.08);
+        color: var(--verde);
+      }
+      .t-cultural .author-tipo {
+        background: rgba(199, 91, 26, 0.08);
+        color: var(--naranja);
+      }
+
+      .testimonios-nav {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 40px;
+      }
+      .nav-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(26, 58, 107, 0.2);
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s;
+      }
+      .nav-dot.active {
+        background: var(--azul);
+        width: 24px;
+        border-radius: 4px;
+      }
+
+      /* ========== BLOG ========== */
+      #blog {
+        background: var(--blanco);
+      }
+
+      .blog-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 50px;
+      }
+      .blog-header .section-subtitle {
+        margin-top: 12px;
+      }
+      .ver-todo-link {
+        color: var(--naranja);
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        transition: gap 0.3s;
+      }
+      .ver-todo-link:hover {
+        gap: 14px;
+      }
+
+      .blog-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 24px;
+      }
+
+      .blog-card {
+        border-radius: 4px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 4px 20px var(--sombra);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        cursor: pointer;
+      }
+      .blog-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 50px var(--sombra);
+      }
+
+      .blog-img {
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+        position: relative;
+      }
+      .blog-card-featured .blog-img {
+        height: 300px;
+      }
+      .blog-img-1 {
+        background: linear-gradient(135deg, #1a3a6b 0%, #4caf50 100%);
+      }
+      .blog-img-2 {
+        background: linear-gradient(135deg, #2d7a3a 0%, #c75b1a 100%);
+      }
+      .blog-img-3 {
+        background: linear-gradient(135deg, #c75b1a 0%, #1a3a6b 100%);
+      }
+
+      .blog-body {
+        padding: 28px;
+      }
+      .blog-meta {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+      .blog-cat {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+      .cat-salud {
+        background: rgba(26, 58, 107, 0.08);
+        color: var(--azul);
+      }
+      .cat-bienestar {
+        background: rgba(45, 122, 58, 0.08);
+        color: var(--verde);
+      }
+      .cat-cultural {
+        background: rgba(199, 91, 26, 0.08);
+        color: var(--naranja);
+      }
+
+      .blog-date {
+        font-size: 12px;
+        color: var(--gris-medio);
+      }
+      .blog-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--gris-oscuro);
+        line-height: 1.3;
+        margin-bottom: 10px;
+      }
+      .blog-card-featured h3 {
+        font-size: 28px;
+      }
+      .blog-card p {
+        font-size: 14px;
+        color: var(--gris-medio);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* ========== CONTACTO ========== */
+      #contacto {
+        background: linear-gradient(135deg, var(--azul) 0%, #0f2347 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      #contacto::before {
+        content: "";
+        position: absolute;
+        bottom: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(199, 91, 26, 0.15) 0%,
+          transparent 70%
+        );
+      }
+
+      .contacto-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+
+      .contacto-info {
+        color: white;
+      }
+      .contacto-info .section-eyebrow {
+        color: var(--naranja-claro);
+      }
+      .contacto-info .section-title {
+        color: white;
+      }
+      .contacto-info .section-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 16px;
+      }
+
+      .contacto-items {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .contacto-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 15px;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .contacto-item:hover {
+        color: white;
+      }
+      .contacto-item-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+        transition: all 0.3s;
+      }
+      .contacto-item:hover .contacto-item-icon {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .redes-social {
+        display: flex;
+        gap: 12px;
+        margin-top: 40px;
+      }
+      .red-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .red-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: white;
+        transform: translateY(-3px);
+      }
+
+      /* FORM */
+      .contacto-form-wrap {
+        background: white;
+        border-radius: 8px;
+        padding: 48px 44px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+      }
+      .form-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 28px;
+        color: var(--azul);
+        margin-bottom: 28px;
+        font-weight: 400;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--gris-medio);
+        font-weight: 500;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 13px 16px;
+        border: 1.5px solid #e0ddd5;
+        border-radius: 4px;
+        font-family: "Jost", sans-serif;
+        font-size: 14px;
+        color: var(--gris-oscuro);
+        background: var(--crema);
+        outline: none;
+        transition: border-color 0.3s;
+        resize: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--azul);
+        background: white;
+      }
+
+      .btn-submit {
+        width: 100%;
+        padding: 16px;
+        background: var(--azul);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-family: "Jost", sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 8px;
+      }
+      .btn-submit:hover {
+        background: var(--naranja);
+        box-shadow: 0 12px 30px rgba(199, 91, 26, 0.35);
+        transform: translateY(-2px);
+      }
+
+      .form-success {
+        display: none;
+        text-align: center;
+        padding: 30px;
+      }
+      .form-success .check {
+        font-size: 50px;
+        margin-bottom: 16px;
+      }
+      .form-success h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 26px;
+        color: var(--azul);
+        margin-bottom: 10px;
+      }
+      .form-success p {
+        color: var(--gris-medio);
+        font-size: 15px;
+      }
+
+      /* ========== WHATSAPP FLOAT ========== */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        z-index: 900;
+        width: 58px;
+        height: 58px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 26px;
+        text-decoration: none;
+        box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s;
+        animation: pulse-wa 2s infinite;
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.12);
+        box-shadow: 0 10px 36px rgba(37, 211, 102, 0.55);
+      }
+      @keyframes pulse-wa {
+        0%,
+        100% {
+          box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 6px 36px rgba(37, 211, 102, 0.65),
+            0 0 0 12px rgba(37, 211, 102, 0.08);
+        }
+      }
+
+      /* ========== FOOTER ========== */
+      footer {
+        background: #0a1628;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 40px 0;
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+      }
+      footer a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: white;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-logo {
+        height: 40px;
+        opacity: 0.7;
+      }
+      /* .footer-copy { } */
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      /* ========== STRIP / DIVIDER ========== */
+      .strip {
+        background: var(--naranja);
+        padding: 28px 0;
+        overflow: hidden;
+      }
+      .strip-inner {
+        display: flex;
+        gap: 60px;
+        animation: marquee 20s linear infinite;
+        white-space: nowrap;
+        width: max-content;
+      }
+      .strip-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-style: italic;
+        color: white;
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .strip-dot {
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        display: inline-block;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ========== ANIMATIONS ========== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-up:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .fade-up:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .fade-up:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+
+      /* ========== MOBILE NAV ========== */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--azul);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 36px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 300;
+        letter-spacing: 2px;
+        transition: color 0.3s;
+      }
+      .mobile-menu a:hover {
+        color: var(--naranja-claro);
+      }
+      .mobile-close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        font-size: 28px;
+        color: white;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+        nav {
+          padding: 16px 32px;
+        }
+        nav.scrolled {
+          padding: 12px 32px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .nosotros-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+        .nosotros-visual {
+          height: 400px;
+        }
+        .servicios-grid {
+          grid-template-columns: 1fr;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+        .contacto-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+        .galeria-grid {
+          grid-template-columns: repeat(6, 1fr);
+          grid-template-rows: 200px 200px;
+        }
+        .gal-item:nth-child(1) {
+          grid-column: span 6;
+          grid-row: span 1;
+        }
+        .gal-item:nth-child(2) {
+          grid-column: span 2;
+        }
+        .gal-item:nth-child(3) {
+          grid-column: span 2;
+        }
+        .gal-item:nth-child(4) {
+          grid-column: span 2;
+        }
+        .gal-item:nth-child(5) {
+          display: none;
+        }
+        .footer-inner {
+          flex-direction: column;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        section {
+          padding: 70px 0;
+        }
+        .container {
+          padding: 0 24px;
+        }
+        .blog-header {
+          flex-direction: column;
+          gap: 16px;
+          align-items: flex-start;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .contacto-form-wrap {
+          padding: 36px 28px;
+        }
+        nav {
+          padding: 14px 20px;
+        }
+        .lang-toggle {
+          top: 14px;
+          right: 14px;
+        }
+        .galeria-grid {
+          padding: 0 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- WhatsApp Float -->
+    <a
+      href="https://wa.me/573000000000"
+      class="whatsapp-float"
+      target="_blank"
+      title="WhatsApp"
+      aria-label="WhatsApp"
+    >
+      <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+        />
+      </svg>
+    </a>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+      <a
+        href="#nosotros"
+        onclick="closeMobileMenu()"
+        class="lang-text"
+        data-es="Nosotros"
+        data-en="About Us"
+        >Nosotros</a
+      >
+      <a
+        href="#servicios"
+        onclick="closeMobileMenu()"
+        class="lang-text"
+        data-es="Servicios"
+        data-en="Services"
+        >Servicios</a
+      >
+      <a
+        href="#galeria"
+        onclick="closeMobileMenu()"
+        class="lang-text"
+        data-es="Galería"
+        data-en="Gallery"
+        >Galería</a
+      >
+      <a
+        href="#testimonios"
+        onclick="closeMobileMenu()"
+        class="lang-text"
+        data-es="Testimonios"
+        data-en="Testimonials"
+        >Testimonios</a
+      >
+      <a href="#blog" onclick="closeMobileMenu()">Blog</a>
+      <a
+        href="#contacto"
+        onclick="closeMobileMenu()"
+        class="lang-text"
+        data-es="Contacto"
+        data-en="Contact"
+        >Contacto</a
+      >
+    </div>
+
+    <!-- NAV -->
+    <nav id="mainNav">
+      <img
+        src="Logotransp.PNG"
+        alt="Valle Vital Experiences"
+        class="nav-logo"
+        onerror="this.style.display = 'none'"
+      />
+      <ul class="nav-links">
+        <li>
+          <a
+            href="#nosotros"
+            class="lang-text"
+            data-es="Nosotros"
+            data-en="About Us"
+            >Nosotros</a
+          >
+        </li>
+        <li>
+          <a
+            href="#servicios"
+            class="lang-text"
+            data-es="Servicios"
+            data-en="Services"
+            >Servicios</a
+          >
+        </li>
+        <li>
+          <a
+            href="#galeria"
+            class="lang-text"
+            data-es="Galería"
+            data-en="Gallery"
+            >Galería</a
+          >
+        </li>
+        <li>
+          <a
+            href="#testimonios"
+            class="lang-text"
+            data-es="Testimonios"
+            data-en="Testimonials"
+            >Testimonios</a
+          >
+        </li>
+        <li><a href="#blog">Blog</a></li>
+        <li>
+          <a
+            href="#contacto"
+            class="lang-text"
+            data-es="Contacto"
+            data-en="Contact"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+      <div class="hamburger" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-slides">
+        <div class="hero-slide slide-1 active"></div>
+        <div class="hero-slide slide-2"></div>
+        <div class="hero-slide slide-3"></div>
+      </div>
+      <div class="hero-content">
+        <img src="/img/Logotransp.PNG" alt="Valle Vital Experiences" class="img-logo">
+        <p
+          class="hero-eyebrow lang-text"
+          data-es="Desde el corazón del Valle"
+          data-en="From the heart of the Valle"
+        >
+          Desde el corazón del Valle
+        </p>
+        
+        <h1 class="hero-title">
+          <span
+            class="lang-text"
+            data-es="Experiencias que"
+            data-en="Experiences that"
+            >Experiencias que transforman tu vida</span
+          ><br />
+        </h1>
+        <p
+          class="hero-subtitle lang-text"
+          data-es="Salud, bienestar y cultura en un destino único. Descubre todo lo que Cali y el Valle del Cauca tienen para ofrecerte."
+          data-en="Health, wellness and culture in a unique destination. Discover all that Cali and Valle del Cauca have to offer."
+        >
+          Salud, bienestar y cultura en un destino único. Descubre todo lo que
+          Cali y el Valle del Cauca tienen para ofrecerte.
+        </p>
+        <div class="hero-cta">
+          <a
+            href="#servicios"
+            class="btn-primary lang-text"
+            data-es="Explorar Servicios"
+            data-en="Explore Services"
+            >Explorar Servicios</a
+          >
+          <a
+            href="#contacto"
+            class="btn-outline lang-text"
+            data-es="Contáctanos"
+            data-en="Contact Us"
+            >Contáctanos</a
+          >
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- STRIP -->
+    <div class="strip">
+      <div class="strip-inner">
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo en Salud</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo de Bienestar</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo Cultural</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Cali, Colombia</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Experiencias únicas</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Health Tourism</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Wellness Tourism</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Cultural Tourism</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo en Salud</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo de Bienestar</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Turismo Cultural</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Cali, Colombia</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Experiencias únicas</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Health Tourism</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Wellness Tourism</span
+        >
+        <span class="strip-text"
+          ><span class="strip-dot"></span> Cultural Tourism</span
+        >
+      </div>
+    </div>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+      <div class="container">
+        <div class="nosotros-grid">
+          <div class="nosotros-visual fade-up">
+            <div class="nosotros-img-main">🏥</div>
+            <div class="nosotros-img-accent">🌿</div>
+            <div class="stat-badge">
+              <div class="num">100+</div>
+              <div
+                class="label lang-text"
+                data-es="Experiencias creadas"
+                data-en="Experiences created"
+              >
+                Experiencias creadas
+              </div>
+            </div>
+          </div>
+          <div class="nosotros-text fade-up">
+            <p
+              class="section-eyebrow lang-text"
+              data-es="Quiénes somos"
+              data-en="Who we are"
+            >
+              Quiénes somos
+            </p>
+            <h2
+              class="section-title lang-text"
+              data-es="Vivir <em>bien</em> es el mejor viaje"
+              data-en="Living <em>well</em> is the best journey"
+            >
+              Vivir <em>bien</em> es el mejor viaje
+            </h2>
+            <p
+              class="section-subtitle lang-text"
+              data-es="En Valle Vital Experiences creemos que viajar va más allá de los destinos. Conectamos a nuestros visitantes con experiencias que nutren el cuerpo, la mente y el alma — todo en el corazón de Cali."
+              data-en="At Valle Vital Experiences, we believe travel goes beyond destinations. We connect our visitors with experiences that nourish body, mind and soul — all in the heart of Cali."
+            >
+              En Valle Vital Experiences creemos que viajar va más allá de los
+              destinos. Conectamos a nuestros visitantes con experiencias que
+              nutren el cuerpo, la mente y el alma — todo en el corazón de Cali.
+            </p>
+            <ul class="valores-list" style="margin-top: 28px">
+              <li>
+                <div class="valor-icon vi-azul">🏥</div>
+                <div>
+                  <strong
+                    class="lang-text"
+                    data-es="Convenios con clínicas reconocidas"
+                    data-en="Agreements with recognized clinics"
+                    >Convenios con clínicas reconocidas</strong
+                  ><br />
+                  <span
+                    class="lang-text"
+                    data-es="Odontología y cirugía estética de alta calidad en Cali."
+                    data-en="High-quality dentistry and cosmetic surgery in Cali."
+                    >Odontología y cirugía estética de alta calidad en
+                    Cali.</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div class="valor-icon vi-verde">🌿</div>
+                <div>
+                  <strong
+                    class="lang-text"
+                    data-es="Naturaleza y bienestar"
+                    data-en="Nature and wellness"
+                    >Naturaleza y bienestar</strong
+                  ><br />
+                  <span
+                    class="lang-text"
+                    data-es="Recorridos ecológicos con experiencias de relajación profunda."
+                    data-en="Ecological tours with deep relaxation experiences."
+                    >Recorridos ecológicos con experiencias de relajación
+                    profunda.</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div class="valor-icon vi-naranja">🎭</div>
+                <div>
+                  <strong
+                    class="lang-text"
+                    data-es="Cultura e identidad"
+                    data-en="Culture and identity"
+                    >Cultura e identidad</strong
+                  ><br />
+                  <span
+                    class="lang-text"
+                    data-es="Tours gastronómicos y recorridos históricos únicos."
+                    data-en="Gastronomic tours and unique historical routes."
+                    >Tours gastronómicos y recorridos históricos únicos.</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <div class="container">
+        <div class="servicios-header fade-up">
+          <p
+            class="section-eyebrow lang-text"
+            data-es="Líneas de turismo"
+            data-en="Tourism lines"
+          >
+            Líneas de turismo
+          </p>
+          <h2
+            class="section-title lang-text"
+            data-es="Tres caminos hacia una <em>experiencia única</em>"
+            data-en="Three paths to a <em>unique experience</em>"
+          >
+            Tres caminos hacia una <em>experiencia única</em>
+          </h2>
+          <p
+            class="section-subtitle lang-text"
+            data-es="Cada línea de turismo está diseñada para ofrecerte lo mejor de Cali y el Valle, adaptado a lo que más te mueve."
+            data-en="Each tourism line is designed to offer you the best of Cali and the Valle, tailored to what moves you most."
+          >
+            Cada línea de turismo está diseñada para ofrecerte lo mejor de Cali
+            y el Valle, adaptado a lo que más te mueve.
+          </p>
+        </div>
+
+        <div class="servicios-grid">
+          <!-- Salud -->
+          <div class="servicio-card s-salud fade-up">
+            <div class="servicio-img">🏥</div>
+            <div class="servicio-body">
+              <p
+                class="servicio-tag lang-text"
+                data-es="Turismo en Salud"
+                data-en="Health Tourism"
+              >
+                Turismo en Salud
+              </p>
+              <h3
+                class="lang-text"
+                data-es="Tu bienestar en manos expertas"
+                data-en="Your wellbeing in expert hands"
+              >
+                Tu bienestar en manos expertas
+              </h3>
+              <p
+                class="lang-text"
+                data-es="Tenemos convenios con las mejores clínicas odontológicas y de cirugía estética de Cali. Te acompañamos desde la consulta hasta tu recuperación, con el soporte logístico que necesitas."
+                data-en="We have agreements with the best dental and cosmetic surgery clinics in Cali. We accompany you from consultation to recovery, with all the logistical support you need."
+              >
+                Tenemos convenios con las mejores clínicas odontológicas y de
+                cirugía estética de Cali. Te acompañamos desde la consulta hasta
+                tu recuperación, con el soporte logístico que necesitas.
+              </p>
+              <a
+                href="#contacto"
+                class="servicio-btn lang-text"
+                data-es="Más información →"
+                data-en="Learn more →"
+                >Más información →</a
+              >
+            </div>
+          </div>
+          <!-- Bienestar -->
+          <div class="servicio-card s-bienestar fade-up">
+            <div class="servicio-img">🌿</div>
+            <div class="servicio-body">
+              <p
+                class="servicio-tag lang-text"
+                data-es="Turismo de Bienestar"
+                data-en="Wellness Tourism"
+              >
+                Turismo de Bienestar
+              </p>
+              <h3
+                class="lang-text"
+                data-es="Reconéctate con la naturaleza"
+                data-en="Reconnect with nature"
+              >
+                Reconéctate con la naturaleza
+              </h3>
+              <p
+                class="lang-text"
+                data-es="Recorridos ecológicos diseñados para la relajación profunda y la unión con el entorno natural. Retiros, meditación, senderos y experiencias sensoriales únicas en el Valle del Cauca."
+                data-en="Ecological routes designed for deep relaxation and connection with the natural environment. Retreats, meditation, trails and unique sensory experiences in Valle del Cauca."
+              >
+                Recorridos ecológicos diseñados para la relajación profunda y la
+                unión con el entorno natural. Retiros, meditación, senderos y
+                experiencias sensoriales únicas en el Valle del Cauca.
+              </p>
+              <a
+                href="#contacto"
+                class="servicio-btn lang-text"
+                data-es="Más información →"
+                data-en="Learn more →"
+                >Más información →</a
+              >
+            </div>
+          </div>
+          <!-- Cultural -->
+          <div class="servicio-card s-cultural fade-up">
+            <div class="servicio-img">🎭</div>
+            <div class="servicio-body">
+              <p
+                class="servicio-tag lang-text"
+                data-es="Turismo Cultural"
+                data-en="Cultural Tourism"
+              >
+                Turismo Cultural
+              </p>
+              <h3
+                class="lang-text"
+                data-es="Sumérgete en la historia y el sabor"
+                data-en="Immerse yourself in history and flavor"
+              >
+                Sumérgete en la historia y el sabor
+              </h3>
+              <p
+                class="lang-text"
+                data-es="Tours gastronómicos y recorridos a sitios de interés que crean conexiones auténticas con las historias, arquitecturas e idiosincrasias de los diferentes lugares del Valle."
+                data-en="Gastronomic tours and visits to points of interest that create authentic connections with the stories, architectures and idiosyncrasies of different places in the Valle."
+              >
+                Tours gastronómicos y recorridos a sitios de interés que crean
+                conexiones auténticas con las historias, arquitecturas e
+                idiosincrasias de los diferentes lugares del Valle.
+              </p>
+              <a
+                href="#contacto"
+                class="servicio-btn lang-text"
+                data-es="Más información →"
+                data-en="Learn more →"
+                >Más información →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria" style="padding-top: 80px; padding-bottom: 80px">
+      <div class="galeria-header container">
+        <p
+          class="section-eyebrow lang-text"
+          data-es="Galería"
+          data-en="Gallery"
+        >
+          Galería
+        </p>
+        <h2
+          class="section-title lang-text"
+          data-es="Momentos que <em>inspiran</em>"
+          data-en="Moments that <em>inspire</em>"
+        >
+          Momentos que <em>inspiran</em>
+        </h2>
+      </div>
+      <div class="galeria-grid">
+        <div class="gal-item">
+          <div class="gal-placeholder">
+            🌄<span class="lang-text" data-es="Agregar foto" data-en="Add photo"
+              >Agregar foto</span
+            >
+          </div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder">
+            🏥<span class="lang-text" data-es="Agregar foto" data-en="Add photo"
+              >Agregar foto</span
+            >
+          </div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder">
+            🍽️<span class="lang-text" data-es="Agregar foto" data-en="Add photo"
+              >Agregar foto</span
+            >
+          </div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder">
+            🌿<span class="lang-text" data-es="Agregar foto" data-en="Add photo"
+              >Agregar foto</span
+            >
+          </div>
+        </div>
+        <div class="gal-item">
+          <div class="gal-placeholder">
+            🎭<span class="lang-text" data-es="Agregar foto" data-en="Add photo"
+              >Agregar foto</span
+            >
+          </div>
+        </div>
+      </div>
+      <p
+        class="galeria-note lang-text"
+        data-es="Las fotos se agregarán a medida que capturemos nuestras experiencias"
+        data-en="Photos will be added as we capture our experiences"
+      >
+        Las fotos se agregarán a medida que capturemos nuestras experiencias
+      </p>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios">
+      <div class="container">
+        <div class="testimonios-header fade-up">
+          <p
+            class="section-eyebrow lang-text"
+            data-es="Testimonios"
+            data-en="Testimonials"
+          >
+            Testimonios
+          </p>
+          <h2
+            class="section-title lang-text"
+            data-es="Lo que dicen nuestros <em>viajeros</em>"
+            data-en="What our <em>travelers</em> say"
+          >
+            Lo que dicen nuestros <em>viajeros</em>
+          </h2>
+        </div>
+      </div>
+      <div class="testimonios-track-wrapper">
+        <div class="testimonios-track" id="testimTrack">
+          <div class="testimonio-card t-salud">
+            <div class="testimonio-stars">★★★★★</div>
+            <p
+              class="testimonio-text lang-text"
+              data-es="La atención médica fue excepcional. El equipo de Valle Vital me acompañó en cada paso del proceso y me hicieron sentir segura y cuidada durante toda mi estadía."
+              data-en="The medical care was exceptional. The Valle Vital team accompanied me every step of the way and made me feel safe and cared for throughout my stay."
+            >
+              La atención médica fue excepcional. El equipo de Valle Vital me
+              acompañó en cada paso del proceso y me hicieron sentir segura y
+              cuidada durante toda mi estadía.
+            </p>
+            <div class="testimonio-author">
+              <div class="author-avatar" style="background: var(--azul)">M</div>
+              <div>
+                <div class="author-name">María Fernanda R.</div>
+                <div class="author-origin">Bogotá, Colombia</div>
+              </div>
+              <span
+                class="author-tipo lang-text"
+                data-es="Salud"
+                data-en="Health"
+                >Salud</span
+              >
+            </div>
+          </div>
+
+          <div class="testimonio-card t-bienestar">
+            <div class="testimonio-stars">★★★★★</div>
+            <p
+              class="testimonio-text lang-text"
+              data-es="El retiro ecológico superó todas mis expectativas. Fue una experiencia de reconexión con la naturaleza que no tenía palabras para describir. Volveré sin duda."
+              data-en="The ecological retreat exceeded all my expectations. It was a reconnection experience with nature that left me speechless. I will definitely return."
+            >
+              El retiro ecológico superó todas mis expectativas. Fue una
+              experiencia de reconexión con la naturaleza que no tenía palabras
+              para describir. Volveré sin duda.
+            </p>
+            <div class="testimonio-author">
+              <div class="author-avatar" style="background: var(--verde)">
+                J
+              </div>
+              <div>
+                <div class="author-name">James Whitfield</div>
+                <div class="author-origin">Toronto, Canadá</div>
+              </div>
+              <span
+                class="author-tipo lang-text"
+                data-es="Bienestar"
+                data-en="Wellness"
+                >Bienestar</span
+              >
+            </div>
+          </div>
+
+          <div class="testimonio-card t-cultural">
+            <div class="testimonio-stars">★★★★★</div>
+            <p
+              class="testimonio-text lang-text"
+              data-es="El tour gastronómico fue un viaje a través de los sabores del Valle. Probamos platos que no conocíamos y aprendimos la historia detrás de cada uno. ¡Increíble!"
+              data-en="The gastronomic tour was a journey through the flavors of the Valle. We tasted dishes we had never tried and learned the story behind each one. Incredible!"
+            >
+              El tour gastronómico fue un viaje a través de los sabores del
+              Valle. Probamos platos que no conocíamos y aprendimos la historia
+              detrás de cada uno. ¡Increíble!
+            </p>
+            <div class="testimonio-author">
+              <div class="author-avatar" style="background: var(--naranja)">
+                S
+              </div>
+              <div>
+                <div class="author-name">Sofia Martínez</div>
+                <div class="author-origin">Ciudad de México, México</div>
+              </div>
+              <span
+                class="author-tipo lang-text"
+                data-es="Cultural"
+                data-en="Cultural"
+                >Cultural</span
+              >
+            </div>
+          </div>
+
+          <div class="testimonio-card t-salud">
+            <div class="testimonio-stars">★★★★★</div>
+            <p
+              class="testimonio-text lang-text"
+              data-es="Vine para un tratamiento dental y regresé con algo mucho más valioso: una perspectiva completamente nueva sobre cómo me cuido. La organización fue impecable."
+              data-en="I came for dental treatment and returned with something much more valuable: a completely new perspective on self-care. The organization was impeccable."
+            >
+              Vine para un tratamiento dental y regresé con algo mucho más
+              valioso: una perspectiva completamente nueva sobre cómo me cuido.
+              La organización fue impecable.
+            </p>
+            <div class="testimonio-author">
+              <div class="author-avatar" style="background: var(--azul-claro)">
+                R
+              </div>
+              <div>
+                <div class="author-name">Roberto Leal</div>
+                <div class="author-origin">Miami, USA</div>
+              </div>
+              <span
+                class="author-tipo lang-text"
+                data-es="Salud"
+                data-en="Health"
+                >Salud</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="testimonios-nav">
+          <button class="nav-dot active" onclick="scrollTestim(0)"></button>
+          <button class="nav-dot" onclick="scrollTestim(1)"></button>
+          <button class="nav-dot" onclick="scrollTestim(2)"></button>
+          <button class="nav-dot" onclick="scrollTestim(3)"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="container">
+        <div class="blog-header fade-up">
+          <div>
+            <p class="section-eyebrow">Blog</p>
+            <h2
+              class="section-title lang-text"
+              data-es="Historias que <em>inspiran</em>"
+              data-en="Stories that <em>inspire</em>"
+            >
+              Historias que <em>inspiran</em>
+            </h2>
+            <p
+              class="section-subtitle lang-text"
+              data-es="Experiencias reales de quienes han vivido el Valle Vital."
+              data-en="Real experiences from those who have lived the Valle Vital."
+            >
+              Experiencias reales de quienes han vivido el Valle Vital.
+            </p>
+          </div>
+          <a
+            href="#"
+            class="ver-todo-link lang-text"
+            data-es="Ver todas las historias →"
+            data-en="See all stories →"
+            >Ver todas las historias →</a
+          >
+        </div>
+
+        <div class="blog-grid">
+          <!-- Blog destacado -->
+          <div class="blog-card blog-card-featured fade-up">
+            <div class="blog-img blog-img-1">🌄</div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span
+                  class="blog-cat cat-bienestar lang-text"
+                  data-es="Bienestar"
+                  data-en="Wellness"
+                  >Bienestar</span
+                >
+                <span
+                  class="blog-date lang-text"
+                  data-es="Próximamente"
+                  data-en="Coming soon"
+                  >Próximamente</span
+                >
+              </div>
+              <h3
+                class="lang-text"
+                data-es="Cómo un retiro en el Valle del Cauca cambió mi perspectiva de vida"
+                data-en="How a retreat in Valle del Cauca changed my life perspective"
+              >
+                Cómo un retiro en el Valle del Cauca cambió mi perspectiva de
+                vida
+              </h3>
+              <p
+                class="lang-text"
+                data-es="Las primeras historias de nuestros viajeros están por llegar. Sé el primero en vivir una experiencia Valle Vital y comparte tu historia con el mundo."
+                data-en="The first stories from our travelers are coming soon. Be the first to live a Valle Vital experience and share your story with the world."
+              >
+                Las primeras historias de nuestros viajeros están por llegar. Sé
+                el primero en vivir una experiencia Valle Vital y comparte tu
+                historia con el mundo.
+              </p>
+            </div>
+          </div>
+
+          <div class="blog-card fade-up">
+            <div class="blog-img blog-img-2">🏥</div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span
+                  class="blog-cat cat-salud lang-text"
+                  data-es="Salud"
+                  data-en="Health"
+                  >Salud</span
+                >
+                <span
+                  class="blog-date lang-text"
+                  data-es="Próximamente"
+                  data-en="Coming soon"
+                  >Próximamente</span
+                >
+              </div>
+              <h3
+                class="lang-text"
+                data-es="Turismo dental en Cali: una opción de calidad mundial"
+                data-en="Dental tourism in Cali: a world-class option"
+              >
+                Turismo dental en Cali: una opción de calidad mundial
+              </h3>
+            </div>
+          </div>
+
+          <div class="blog-card fade-up">
+            <div class="blog-img blog-img-3">🎭</div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span
+                  class="blog-cat cat-cultural lang-text"
+                  data-es="Cultural"
+                  data-en="Cultural"
+                  >Cultural</span
+                >
+                <span
+                  class="blog-date lang-text"
+                  data-es="Próximamente"
+                  data-en="Coming soon"
+                  >Próximamente</span
+                >
+              </div>
+              <h3
+                class="lang-text"
+                data-es="Sabores del Valle: la ruta gastronómica que debes hacer"
+                data-en="Flavors of the Valle: the gastronomic route you must do"
+              >
+                Sabores del Valle: la ruta gastronómica que debes hacer
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <div class="contacto-grid">
+          <div class="contacto-info fade-up">
+            <p
+              class="section-eyebrow lang-text"
+              data-es="Hablemos"
+              data-en="Let's talk"
+            >
+              Hablemos
+            </p>
+            <h2
+              class="section-title lang-text"
+              data-es="¿Lista tu próxima <em>experiencia</em>?"
+              data-en="Ready for your next <em>experience</em>?"
+            >
+              ¿Lista tu próxima <em>experiencia</em>?
+            </h2>
+            <p
+              class="section-subtitle lang-text"
+              data-es="Cuéntanos qué tipo de experiencia buscas y diseñamos juntos tu viaje ideal."
+              data-en="Tell us what kind of experience you are looking for and we will design your ideal trip together."
+            >
+              Cuéntanos qué tipo de experiencia buscas y diseñamos juntos tu
+              viaje ideal.
+            </p>
+            <div class="contacto-items">
+              <a href="mailto:contacto@vallevital.com" class="contacto-item">
+                <div class="contacto-item-icon">✉️</div>
+                <span>contacto@vallevital.com</span>
+              </a>
+              <a
+                href="https://wa.me/573000000000"
+                class="contacto-item"
+                target="_blank"
+              >
+                <div class="contacto-item-icon">📱</div>
+                <span>+57 300 000 0000</span>
+              </a>
+              <div class="contacto-item">
+                <div class="contacto-item-icon">📍</div>
+                <span>Cali, Valle del Cauca, Colombia</span>
+              </div>
+            </div>
+            <div class="redes-social" style="margin-top: 36px">
+              <a href="#" class="red-btn" title="Instagram" target="_blank">
+                <svg
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="red-btn" title="TikTok" target="_blank">
+                <svg
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.69a8.28 8.28 0 004.84 1.54V6.79a4.85 4.85 0 01-1.08-.1z"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="red-btn" title="Facebook" target="_blank">
+                <svg
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- FORM -->
+          <div class="contacto-form-wrap fade-up" id="formWrap">
+            <h3
+              class="form-title lang-text"
+              data-es="Escríbenos"
+              data-en="Write to us"
+            >
+              Escríbenos
+            </h3>
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="lang-text" data-es="Nombre" data-en="Name"
+                    >Nombre</label
+                  >
+                  <input
+                    type="text"
+                    name="nombre"
+                    required
+                    placeholder="Tu nombre"
+                  />
+                </div>
+                <div class="form-group">
+                  <label
+                    class="lang-text"
+                    data-es="País de origen"
+                    data-en="Country of origin"
+                    >País de origen</label
+                  >
+                  <input type="text" name="pais" placeholder="Colombia" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="tu@email.com"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="lang-text"
+                  data-es="Tipo de turismo"
+                  data-en="Tourism type"
+                  >Tipo de turismo</label
+                >
+                <select name="tipo">
+                  <option
+                    class="lang-text"
+                    data-es="-- Selecciona una opción --"
+                    data-en="-- Select an option --"
+                  >
+                    -- Selecciona una opción --
+                  </option>
+                  <option
+                    class="lang-text"
+                    data-es="Turismo en Salud"
+                    data-en="Health Tourism"
+                  >
+                    Turismo en Salud
+                  </option>
+                  <option
+                    class="lang-text"
+                    data-es="Turismo de Bienestar"
+                    data-en="Wellness Tourism"
+                  >
+                    Turismo de Bienestar
+                  </option>
+                  <option
+                    class="lang-text"
+                    data-es="Turismo Cultural"
+                    data-en="Cultural Tourism"
+                  >
+                    Turismo Cultural
+                  </option>
+                  <option
+                    class="lang-text"
+                    data-es="Combinado / No sé aún"
+                    data-en="Combined / Not sure yet"
+                  >
+                    Combinado / No sé aún
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="lang-text" data-es="Mensaje" data-en="Message"
+                  >Mensaje</label
+                >
+                <textarea
+                  name="mensaje"
+                  rows="4"
+                  placeholder="Cuéntanos sobre tu experiencia ideal..."
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn-submit lang-text"
+                data-es="Enviar mensaje"
+                data-en="Send message"
+              >
+                Enviar mensaje
+              </button>
+            </form>
+            <div class="form-success" id="formSuccess">
+              <div class="check">✅</div>
+              <h3
+                class="lang-text"
+                data-es="¡Mensaje enviado!"
+                data-en="Message sent!"
+              >
+                ¡Mensaje enviado!
+              </h3>
+              <p
+                class="lang-text"
+                data-es="Gracias por contactarnos. Te responderemos pronto."
+                data-en="Thank you for contacting us. We will get back to you soon."
+              >
+                Gracias por contactarnos. Te responderemos pronto.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-inner">
+        <div style="color: rgba(255, 255, 255, 0.3); font-size: 12px">
+          © 2026 Valle Vital Experiences · Cali, Colombia
+        </div>
+        <div class="footer-links">
+          <a
+            href="#nosotros"
+            class="lang-text"
+            data-es="Nosotros"
+            data-en="About"
+            >Nosotros</a
+          >
+          <a
+            href="#servicios"
+            class="lang-text"
+            data-es="Servicios"
+            data-en="Services"
+            >Servicios</a
+          >
+          <a
+            href="#contacto"
+            class="lang-text"
+            data-es="Contacto"
+            data-en="Contact"
+            >Contacto</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ===== NAV SCROLL =====
+      const nav = document.getElementById("mainNav");
+      window.addEventListener("scroll", () => {
+        nav.classList.toggle("scrolled", window.scrollY > 60);
+      });
+
+      // ===== HERO SLIDESHOW =====
+      const slides = document.querySelectorAll(".hero-slide");
+      let currentSlide = 0;
+      setInterval(() => {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+      }, 4000);
+
+      // ===== MOBILE MENU =====
+      function openMobileMenu() {
+        document.getElementById("mobileMenu").classList.add("open");
+      }
+      function closeMobileMenu() {
+        document.getElementById("mobileMenu").classList.remove("open");
+      }
+
+      // ===== FADE UP OBSERVER =====
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => observer.observe(el));
+
+      // ===== TESTIMONIOS NAV =====
+      function scrollTestim(idx) {
+        const track = document.getElementById("testimTrack");
+        const cards = track.querySelectorAll(".testimonio-card");
+        const dots = document.querySelectorAll(".nav-dot");
+        dots.forEach((d) => d.classList.remove("active"));
+        dots[idx].classList.add("active");
+        cards[idx].scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+
+      // ===== FORM =====
+      function handleSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        const nombre = data.get("nombre");
+        const email = data.get("email");
+        const pais = data.get("pais");
+        const tipo = data.get("tipo");
+        const mensaje = data.get("mensaje");
+
+        // Build mailto link
+        const subject = encodeURIComponent(
+          `Valle Vital — Consulta de ${nombre}`,
+        );
+        const body = encodeURIComponent(
+          `Nombre: ${nombre}\nEmail: ${email}\nPaís: ${pais}\nTipo de turismo: ${tipo}\n\nMensaje:\n${mensaje}`,
+        );
+        window.location.href = `mailto:contacto@vallevital.com?subject=${subject}&body=${body}`;
+
+        form.style.display = "none";
+        document.getElementById("formSuccess").style.display = "block";
+      }
+
+      // ===== LANGUAGE TOGGLE =====
+      let currentLang = "es";
+
+      function setLang(lang) {
+        currentLang = lang;
+        document.querySelectorAll(".lang-btn").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.textContent.toLowerCase() === lang,
+          );
+        });
+        document.querySelectorAll(".lang-text").forEach((el) => {
+          const text = el.getAttribute(`data-${lang}`);
+          if (!text) return;
+          // Check if it contains HTML tags
+          if (text.includes("<")) {
+            el.innerHTML = text;
+          } else {
+            el.textContent = text;
+          }
+        });
+        // Update document lang
+        document.documentElement.lang = lang;
+        // Update placeholder text
+        document.querySelectorAll("select option.lang-text").forEach((opt) => {
+          const text = opt.getAttribute(`data-${lang}`);
+          if (text) opt.textContent = text;
+        });
+      }
+    </script>
+  </body>
+</html>
